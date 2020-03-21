@@ -62,10 +62,39 @@ print (data)
 
 print('Forma %2d,%2d:' % (signals.shape))
 
+print ('verificamos el campo counter - debe ser consecutivo')
+
+print(type(data))
+
+count_missing=0
+last=signals.counter[0]
+
+for row in signals.counter:
+
+    if (row < last):
+        count = 100 + row - last
+    else:
+        count = row - last
+
+    count_missing+= count
+
+    last=row + 1
+    if (last == 100):
+        last=0
+
+print("Los valores perdidos son en totoal: %2f" % count_missing)
+
 print('Python slicing...[:,].  El \':\' sirve para indicar el rango desde hasta.  Los indices son posiciones segun la forma del tensor.')
 eeg = data[:,2]
 
 print(eeg)
+
+#Identificamos los picos
+quartiles = np.quantile(eeg,[0.25,0.5,0.75])
+
+for measure in eeg:
+    if (measure > quartiles[2]):
+        print("Pico identificado en %2f", measure)
 
 # Ojo con el filtro OR.
 eeg[eeg>50]
