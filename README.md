@@ -58,7 +58,7 @@ If you don't know anything at all about python, this is the place to be.
 * [filtrostemporales.py](filtrostemporales.py): Convolution and numpy slicing.
 * [filtrosespectrales.py](filtrosespectrales.py): Basic sample to extract spectral characteristics from time series.
 * [filtrosespaciales.py](filtrosespaciales.py): Blind source separation sample.
-* [imagefeatures.py](imagefeatures.py): Program to extract features from an image using opencv.
+* [onepassfeatureextraction.py](onepassfeatureextraction.py): Program to extract features from an image using opencv.
 * [onepassclassifier.py](onepassclassifier.py): Program to classify those features using different classifiers.  This contains all the elements to implement a classification model.
 * [InteractiveNotebook.ipynb](InteractiveNotebook.ipynb): Jupyter notebook sample for creating visualizing tools with Altair.
 * [baseline.py](baseline.py): Signal baseline removal sample.
@@ -97,6 +97,7 @@ https://online-learning.harvard.edu/course/using-python-research
   
 # References and sources
 
+* Visual Studio Code tips (debugging line by line included): https://code.visualstudio.com/docs/python/python-tutorial
 * https://jalammar.github.io/visual-numpy/
 * [Guía Guit](https://rogerdudler.github.io/git-guide/index.es.html)
 * [Tom O'Haver Pragmatic Introduction to Signal Processing](https://terpconnect.umd.edu/~toh/spectrum/): Awesome guide on tools to tackle signal processing.
@@ -105,7 +106,8 @@ https://online-learning.harvard.edu/course/using-python-research
 * https://towardsdatascience.com/t-sne-python-example-1ded9953f26
 * https://github.com/lmcinnes/umap
 * https://towardsdatascience.com/t-sne-python-example-1ded9953f26
-* https://github.com/aaizemberg/
+* https://github.com/aaizemberg/: Everything you would like to know about Visualizations, GIS, databases, and big data science.
+* https://github.com/ezequielma20/data-science: Excellent resource of this great Data Science Dev from Baufest.
 * https://blog.goodaudience.com/introduction-to-1d-convolutional-neural-networks-in-keras-for-time-sequences-3a7ff801a2cf
 * https://medium.com/odscjournal/data-scientists-versus-statisticians-8ea146b7a47f
 * https://github.com/healthDataScience/deep-learning-HAR
