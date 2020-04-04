@@ -113,8 +113,3 @@ sns.set(style="darkgrid")
 sns.lineplot(x="timestamp", y="eeg", hue="attention", data=signals)
 import matplotlib.pyplot as plt
 plt.show()
-
-
-
-
-
