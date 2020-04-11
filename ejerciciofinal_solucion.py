@@ -399,7 +399,7 @@ for i in initial_Fn:
 
 maximum_values_On = np.isin(peaks_O1.index, peaks_O2.index)
 
-#El punto en el que la persona pestaneo deberia ser este en la matriz PSD para O1 y O2
+#El punto en el que la persona movio el parpado deberia ser este en la matriz PSD para O1 y O2
 peaks_O1[maximum_values_On].index
 
 #Los rangos de puntos deberian ser:
@@ -417,6 +417,37 @@ else:
 
 for i in initial_On:
     print(" El 'parpado se mueve' COMIENZA en %d y termina en %d" % (i, i+window))
+
+## %% vamos a intentar identificar cuando mueve la cabeza. Para esto, deberiamos ver el giroscopio X e Y.
+if (peaks_Gx.size < peaks_Gy.size):
+    excluir = np.isin(peaks_Gx.index, peaks_Gy.index) # cuando se giran ambos ejes - deberiamos excluir estos casos.
+else:
+    excluir = np.isin(peaks_Gy.index, peaks_Gx.index)  # cuando se giran ambos ejes - deberiamos excluir estos casos.
+
+# nota - nos dio all false, pero vamos a implementar igual la logica de exclusion de esos casos:
+maximum_values_Gn_yaw = peaks_Gx[excluir != True].index #cuando se dan maximos movimientos en X - YAW
+maximum_values_Gn_roll = peaks_Gy[excluir != True].index #cuando se dan maximos movimientos en Y - ROLL
+
+
 ## %%
+print("Los momentos en los que se hacen acciones con la cabeza: ")
+
+yaws = peaks_Gx[maximum_values_Gn_yaw].index * window
+rolls = peaks_Gy[maximum_values_Gn_roll].index * window
+
+print("YAWS: ")
+for i in yaws:
+    print("COMIENZA en %d y termina en %d" % (i, i+window))
+
+print("ROLLS: ")
+for i in rolls:
+    print("COMIENZA en %d y termina en %d" % (i, i+window))
+
+# NOTA: No entendemos como detectar si abrio la boca o no.
+
+## %% Ejercicio 2 - Sobre los datos de MNIST, intenten luego de clusterizar armar un clasificador.
+
+
+
 
 
