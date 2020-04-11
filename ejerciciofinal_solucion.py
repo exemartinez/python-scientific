@@ -376,8 +376,26 @@ peaks_Gy = returnPeaksPSD(psd_Gy, qrt_psd_Gy)
 ## %%
 #Ahora analizamos si tenemos picos en los mismos sensores en el mismo momento en el que se da en la serie de tiempo.
 
-# "Cuando ese valor sea máximo podés asumir que es cuando la persona tiene los ojos cerrados."
+# "F7 y F8 están ubicados en la zona frontal, por lo que van a detectar mejor los picos provocados por los pestañeos."
+#Hacemos, entonces, el mismo analisis sobre F7 y F8.
 
+maximum_values_Fn = np.isin(peaks_F7.index, peaks_F8.index)
+
+#El punto en el que la persona pestaneo deberia ser este en la matriz PSD para F7 y F8
+peaks_F7[maximum_values_Fn].index
+
+#Los rangos de puntos deberian ser:
+
+initial_Fn = peaks_F8[maximum_values_Fn].index * window # lo multiplico por la ventana para que me retorne la posicion original en la serie de tiempo.
+
+print("Los pestañeos se dieron, en la serie de tiempo en: ")
+
+for i in initial_Fn:
+    print("El pestañeo COMIENZA en %d y termina en %d en la serie de tiempo original." % (i, i+window))
+
+## %% Intentamos resolver - Ejercicio 1 - De las señales del EPOC Emotiv que obtuvimos de SUJETO, intenten estudiar las señales detectando: los pestañeos sobre F8 y F7, el momento donde el sujeto cierra los ojos, donde abre y cierra la boca, donde mueve la cabeza haciendo Roll, y donde mueve la cabeza haciendo YAW."
+# # En el punto anterior, resulvimos con F7 y F8 los pestañeos. Veamos ahora si podemos resolver cuando cierra y abre los ojos (Sensores O1 y O2)
+# "Cuando ese valor [el PSD en O1 y O2] sea máximo podés asumir que es cuando la persona tiene los ojos cerrados."
 
 maximum_values_On = np.isin(peaks_O1.index, peaks_O2.index)
 
@@ -389,12 +407,16 @@ peaks_O1[maximum_values_On].index
 initial_On = peaks_O1[maximum_values_On].index * window
 
 
-## %% Resultado final Ejercicio 0 - Construyan una alternativa para detectar pestañeos y trabajen sobre el dataset de pestañeos para simular y testear el abordaje propuesto.
-print("Los pestaneos se dieron, en la serie de tiempo en: ")
+## %% Resultado final - Identificacion de apertura y cierre de ojos.
+print("Los ojo se abren/cierran  en la serie de tiempo en: ")
+
+if ((initial_On.size % 2) == 0):
+    print ("Podemos asumir que la persona empezo abriendo los ojos y termino cerrandolos o alreves")
+else:
+    print("O la persona esta con los ojos abiertos, o con los ojos cerrados")
 
 for i in initial_On:
-    print(" El pestaño COMIENZA en %d y termina en %d" % (i, i+window))
-
-## %% Intentamos resolver "1 - De las señales del EPOC Emotiv que obtuvimos de SUJETO, intenten estudiar las señales detectando: los pestañeos sobre F8 y F7, el momento donde el sujeto cierra los ojos, donde abre y cierra la boca, donde mueve la cabeza haciendo Roll, y donde mueve la cabeza haciendo YAW."
+    print(" El 'parpado se mueve' COMIENZA en %d y termina en %d" % (i, i+window))
+## %%
 
 
